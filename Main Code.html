@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranav Khandait - Developer Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Define CSS Variables for theming */
+        :root {
+            --bg-color-light: #f8fafc; /* Tailwind's slate-50 */
+            --text-color-light: #334155; /* Tailwind's slate-700 */
+            --card-bg-light: #ffffff;
+            --card-border-light: #e2e8f0; /* Tailwind's slate-200 */
+            --header-gradient-from-light: #2563eb; /* Tailwind's blue-600 */
+            --header-gradient-to-light: #6d28d9; /* Tailwind's indigo-700 */
+            --hero-gradient-from-light: #3b82f6; /* Tailwind's blue-500 (lighter blue) */
+            --hero-gradient-to-light: #2563eb; /* Tailwind's blue-600 (darker blue) */
+            --contact-gradient-from-light: #3b82f6; /* Tailwind's blue-500 */
+            --contact-gradient-to-light: #4f46e5; /* Tailwind's indigo-600 */
+            --heading-color: #1e40af; /* Tailwind's blue-800 for light mode headings */
+            --skill-bg-light: #f1f5f9; /* Tailwind's gray-100 */
+            --footer-bg-light: #1e293b; /* Tailwind's gray-800 */
+            --footer-text-light: #ffffff;
+            --scroll-track-light: #cbd5e1; /* Tailwind's slate-300 */
+            --scroll-thumb-light: #64748b; /* Tailwind's slate-600 */
+            --scroll-thumb-hover-light: #475569; /* Tailwind's slate-700 */
+
+            /* Slider specific colors */
+            --slider-bg-light: #a3a3a3; /* Gray-400 */
+            --slider-thumb-light: #f3f4f6; /* Gray-100 */
+            --slider-icon-active-light: #3b82f6; /* Blue-500 */
+            --slider-icon-inactive-light: #e0e0e0; /* Custom light gray */
+        }
+
+        .dark {
+            --bg-color-light: #1a202c; /* Reverted to darker background */
+            --text-color-light: #e2e8f0; /* Reverted to lighter text */
+            --card-bg-light: #2d3748; /* Reverted to darker card background */
+            --card-border-light: #4a5568; /* Reverted to darker card border */
+            --header-gradient-from-light: #1a202c; /* Reverted to darker header gradient */
+            --header-gradient-to-light: #2d3748; /* Reverted to darker header gradient */
+            --hero-gradient-from-light: #1e3a8a; /* Deeper blue for dark mode start */
+            --hero-gradient-to-light: #172554; /* Even deeper blue for dark mode end */
+            --contact-gradient-from-light: #2c5282; /* Reverted to darker contact gradient */
+            --contact-gradient-to-light: #4338ca; /* Reverted to darker contact gradient */
+            --heading-color: #f8fafc; /* Reverted to almost white for dark mode headings */
+            --skill-bg-light: #2a3544; /* Reverted to darker skill section */
+            --footer-bg-light: #0f172a; /* Retaining dark footer */
+            --footer-text-light: #e2e8f0;
+            --scroll-track-light: #4a5568; /* Reverted */
+            --scroll-thumb-light: #718096; /* Reverted */
+            --scroll-thumb-hover-light: #a0aec0; /* Reverted */
+
+            /* Slider specific colors for dark mode - reverted */
+            --slider-bg-light: #4a5568; /* Reverted */
+            --slider-thumb-light: #e2e8f0; /* Reverted */
+            --slider-icon-active-light: #fde047; /* Reverted */
+            --slider-icon-inactive-light: #718096; /* Reverted */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--scroll-track-light);
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--scroll-thumb-light);
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--scroll-thumb-hover-light);
+        }
+
+        /* Apply theme colors to specific elements */
+        header { background-image: linear-gradient(to right, var(--header-gradient-from-light), var(--header-gradient-to-light)); transition: background-image 0.3s ease; }
+        #hero { background-image: linear-gradient(to bottom right, var(--hero-gradient-from-light), var(--hero-gradient-to-light)); transition: background-image 0.3s ease; }
+        #about .max-w-3xl { background-color: var(--card-bg-light); border-color: var(--card-border-light); transition: background-color 0.3s ease, border-color 0.3s ease; }
+        #skills { background-color: var(--skill-bg-light); transition: background-color 0.3s ease; }
+        #skills .bg-white { background-color: var(--card-bg-light); border-color: var(--card-border-light); transition: background-color 0.3s ease, border-color 0.3s ease; }
+        #projects .bg-white { background-color: var(--card-bg-light); border-color: var(--card-border-light); transition: background-color 0.3s ease, border-color 0.3s ease; }
+        #contact { background-image: linear-gradient(to bottom right, var(--contact-gradient-from-light), var(--contact-gradient-to-light)); transition: background-image 0.3s ease; }
+
+        /* Headings styling */
+        h2 { color: var(--heading-color); transition: color 0.3s ease; }
+        /* Ensure specific text colors within elements adapts correctly */
+        .text-gray-700 { color: var(--text-color-light); }
+        .dark .text-gray-700 { color: var(--text-color-light); }
+        .text-gray-800 { color: var(--text-color-light); }
+        .dark .text-gray-800 { color: var(--text-color-light); }
+
+        /* Custom Slider Styles */
+        .theme-slider {
+            width: 80px; /* Adjust width as needed */
+            height: 36px; /* Adjust height as needed */
+            background-color: var(--slider-bg-light);
+            border-radius: 18px; /* Half of height for full pill shape */
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px; /* Padding for icons */
+            transition: background-color 0.7s ease-in-out; /* Slower transition */
+        }
+
+        .theme-slider-thumb {
+            width: 28px;
+            height: 28px;
+            background-color: var(--slider-thumb-light);
+            border-radius: 50%;
+            position: absolute;
+            left: 4px; /* Initial position */
+            transition: left 0.7s ease-in-out, background-color 0.7s ease-in-out; /* Slower transition */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .theme-slider.dark-mode .theme-slider-thumb {
+            left: calc(100% - 28px - 4px); /* Move to right for dark mode */
+        }
+
+        .theme-slider .lucide {
+            z-index: 1; /* Ensure icons are above the thumb */
+            transition: color 0.7s ease-in-out; /* Slower transition */
+        }
+
+        .theme-slider .lucide-sun {
+            color: var(--slider-icon-active-light); /* Active sun color in light mode */
+        }
+        .theme-slider.dark-mode .lucide-sun {
+            color: var(--slider-icon-inactive-light); /* Inactive sun color in dark mode */
+        }
+
+        .theme-slider .lucide-moon {
+            color: var(--slider-icon-inactive-light); /* Inactive moon color in light mode */
+        }
+        .theme-slider.dark-mode .lucide-moon {
+            color: var(--slider-icon-active-light); /* Active moon color in dark mode */
+        }
+
+        /* Timeline styles for About Me section */
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem; /* 24px */
+        }
+
+        .timeline-year {
+            flex-shrink: 0;
+            width: 100px; /* Fixed width for year */
+            font-weight: 600; /* Semi-bold */
+            color: var(--heading-color); /* Use heading color for years */
+            margin-right: 1.5rem; /* 24px */
+            text-align: right;
+            padding-right: 10px; /* Space before line */
+            position: relative;
+        }
+
+        .timeline-year::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 100%; /* Line height */
+            background-color: #cbd5e1; /* Tailwind slate-300 */
+            transition: background-color 0.7s ease-in-out; /* Slower transition */
+        }
+        .dark .timeline-year::after {
+            background-color: #4a5568; /* Reverted to darker line color for dark bg */
+        }
+
+        .timeline-content {
+            flex-grow: 1;
+            padding-left: 10px; /* Space after line */
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .timeline-year {
+                width: auto;
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+                text-align: center;
+                padding-right: 0;
+            }
+            .timeline-year::after {
+                display: none; /* Hide vertical line on mobile */
+            }
+            .timeline-content {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header/Navigation -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg fixed w-full z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <!-- Initials as a circular div -->
+                <div class="rounded-full w-8 h-8 flex items-center justify-center bg-blue-400 text-white font-bold text-sm border-2 border-white">
+                    PK
+                </div>
+                <a href="#" class="text-2xl font-bold tracking-tight">Pranav Khandait</a>
+            </div>
+            <ul class="hidden md:flex space-x-6 items-center">
+                <li><a href="#about" class="px-3 py-2 rounded-md hover:bg-white hover:text-blue-700 hover:scale-105 transition-all duration-700 ease-in-out">About</a></li>
+                <li><a href="#skills" class="px-3 py-2 rounded-md hover:bg-white hover:text-blue-700 hover:scale-105 transition-all duration-700 ease-in-out">Skills</a></li>
+                <li><a href="#projects" class="px-3 py-2 rounded-md hover:bg-white hover:text-blue-700 hover:scale-105 transition-all duration-700 ease-in-out">Projects</a></li>
+                <li><a href="#contact" class="px-3 py-2 rounded-md hover:bg-white hover:text-blue-700 hover:scale-105 transition-all duration-700 ease-in-out">Contact</a></li>
+                <!-- Dark/Light Mode Slider -->
+                <li>
+                    <div id="theme-slider" class="theme-slider">
+                        <i data-lucide="sun" class="w-6 h-6 lucide-sun"></i>
+                        <div class="theme-slider-thumb"></div>
+                        <i data-lucide="moon" class="w-6 h-6 lucide-moon"></i>
+                    </div>
+                </li>
+            </ul>
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center md:hidden">
+                <!-- Dark/Light Mode Slider for Mobile -->
+                <div id="theme-slider-mobile" class="theme-slider mr-2">
+                    <i data-lucide="sun" class="w-6 h-6 lucide-sun"></i>
+                    <div class="theme-slider-thumb"></div>
+                    <i data-lucide="moon" class="w-6 h-6 lucide-moon"></i>
+                </div>
+                <button id="mobile-menu-button" class="focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-700 px-4 py-2">
+            <ul class="flex flex-col space-y-2">
+                <li><a href="#about" class="block py-2 px-4 hover:bg-white hover:text-blue-700 rounded-md transition-colors duration-700 ease-in-out">About</a></li>
+                <li><a href="#skills" class="block py-2 px-4 hover:bg-white hover:text-blue-700 rounded-md transition-colors duration-700 ease-in-out">Skills</a></li>
+                <li><a href="#projects" class="block py-2 px-4 hover:bg-white hover:text-blue-700 rounded-md transition-colors duration-700 ease-in-out">Projects</a></li>
+                <li><a href="#contact" class="block py-2 px-4 hover:bg-white hover:text-blue-700 rounded-md transition-colors duration-700 ease-in-out">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center min-h-screen pt-16">
+            <div class="container mx-auto px-4 py-16 text-center animate-fade-in">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">Hi, I'm Pranav Khandait</h1>
+                <p class="text-xl md:text-2xl mb-8 font-light">An Aspiring Computer Science Engineer</p>
+                <a href="#projects" class="inline-block bg-white text-blue-600 hover:bg-blue-50 hover:text-blue-700 transition-all duration-700 ease-in-out font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105">
+                    View My Work
+                </a>
+            </div>
+            <!-- Background Blob/Shape for visual interest -->
+            <div class="absolute inset-0 z-0 opacity-20">
+                <svg class="w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#ffffff" fill-opacity="0.1" d="M0,128L48,112C96,96,192,64,288,80C384,96,480,160,576,176C672,192,768,160,864,144C960,128,1056,128,1152,144C1248,160,1344,192,1392,208L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="container mx-auto px-4 py-16 md:py-24 text-center">
+            <h2 class="text-5xl font-extrabold mb-8">About Me</h2>
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-xl border border-gray-200 text-left">
+                <p class="text-lg leading-relaxed text-gray-700 mb-6 text-center">
+                    Hello! I'm Pranav Khandait, currently pursuing my B.Tech in Computer Science Engineering at D. Y. Patil International University. I am in my second year and passionate about applying my skills to real-world problems. My academic journey and hands-on projects are building a strong foundation in software development and system design. I enjoy exploring new technologies and continuously expanding my knowledge base to create efficient and innovative solutions. I'm always eager to collaborate on exciting projects and contribute to technological advancements.
+                </p>
+
+                <div class="mt-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">Education</h3>
+                    <div class="flex flex-col items-start px-4 sm:px-0">
+                        <!-- Education Item 1 -->
+                        <div class="timeline-item w-full">
+                            <div class="timeline-year">2016 - 2022</div>
+                            <div class="timeline-content">
+                                <h4 class="text-xl font-semibold text-gray-800">St Ursula High School</h4>
+                                <p class="text-gray-700 text-base">High School Education</p>
+                            </div>
+                        </div>
+                        <!-- Education Item 2 -->
+                        <div class="timeline-item w-full">
+                            <div class="timeline-year">2022 - 2023</div>
+                            <div class="timeline-content">
+                                <h4 class="text-xl font-semibold text-gray-800">Vidya Valley North Point College</h4>
+                                <p class="text-gray-700 text-base">Junior College / Pre-University</p>
+                            </div>
+                        </div>
+                        <!-- Education Item 3 -->
+                        <div class="timeline-item w-full">
+                            <div class="timeline-year">2023 - 2025</div>
+                            <div class="timeline-content">
+                                <h4 class="text-xl font-semibold text-gray-800">DY Patil International University</h4>
+                                <p class="text-gray-700 text-base">B.Tech in Computer Science Engineering</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">Experience</h3>
+                    <div class="flex flex-col items-start px-4 sm:px-0">
+                        <!-- Experience Item 1 -->
+                        <div class="timeline-item w-full">
+                            <div class="timeline-year">8 Weeks</div>
+                            <div class="timeline-content">
+                                <h4 class="text-xl font-semibold text-gray-800">Bhagyoday Engineering</h4>
+                                <p class="text-gray-700 text-base">Internship</p>
+                            </div>
+                        </div>
+                        <!-- Experience Item 2 -->
+                        <div class="timeline-item w-full">
+                            <div class="timeline-year">8 Weeks</div>
+                            <div class="timeline-content">
+                                <h4 class="text-xl font-semibold text-gray-800">EliteTech Intern</h4>
+                                <p class="text-gray-700 text-base">Internship</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="bg-gray-100 py-16 md:py-24">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-5xl font-extrabold mb-8">My Skills</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <!-- Skill Card 1: HTML -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-700 ease-in-out flex flex-col items-center">
+                        <i data-lucide="layout" class="w-12 h-12 text-orange-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">HTML5</h3>
+                        <p class="text-gray-600 text-sm">Semantic markup and accessibility.</p>
+                    </div>
+                    <!-- Skill Card 2: CSS -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-700 ease-in-out flex flex-col items-center">
+                        <i data-lucide="palette" class="w-12 h-12 text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">CSS3</h3>
+                        <p class="text-gray-600 text-sm">Responsive design and modern styling.</p>
+                    </div>
+                    <!-- Skill Card 3: JavaScript -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-700 ease-in-out flex flex-col items-center">
+                        <i data-lucide="code" class="w-12 h-12 text-yellow-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">JavaScript (ES6+)</h3>
+                        <p class="text-gray-600 text-sm">Dynamic web applications.</p>
+                    </div>
+                    <!-- Skill Card 4: React -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-700 ease-in-out flex flex-col items-center">
+                        <i data-lucide="atom" class="w-12 h-12 text-cyan-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">React.js</h3>
+                        <p class="text-gray-600 text-sm">Building interactive UIs.</p>
+                    </div>
+                    <!-- Skill Card 5: Node.js -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-700 ease-in-out flex flex-col items-center">
+                        <i data-lucide="server" class="w-12 h-12 text-green-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Node.js</h3>
+                        <p class="text-gray-600 text-sm">Server-side development.</p>
+                    </div>
+                    <!-- Skill Card 6: Express.js -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-700 ease-in-out flex flex-col items-center">
+                        <i data-lucide="power" class="w-12 h-12 text-purple-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Express.js</h3>
+                        <p class="text-gray-600 text-sm">Backend API development.</p>
+                    </div>
+                    <!-- Skill Card 7: SQL/Databases -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-700 ease-in-out flex flex-col items-center">
+                        <i data-lucide="database" class="w-12 h-12 text-lime-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">SQL/Databases</h3>
+                        <p class="text-gray-600 text-sm">Database design and management.</p>
+                    </div>
+                    <!-- Skill Card 8: Git & GitHub -->
+                    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all duration-700 ease-in-out flex flex-col items-center">
+                        <i data-lucide="git-fork" class="w-12 h-12 text-red-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Git & GitHub</h3>
+                        <p class="text-gray-600 text-sm">Version control and collaboration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="container mx-auto px-4 py-16 md:py-24 text-center">
+            <h2 class="text-5xl font-extrabold mb-12">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Project Card 1: Database Management System for Vehicle Maintenance -->
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-700 ease-in-out border border-gray-200">
+                    <img src="https://placehold.co/600x400/81e6d9/000000?text=Vehicle+DB" alt="Database Management System for Vehicle Maintenance" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">Vehicle Maintenance DB System</h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Developed a robust database management system designed to track and manage vehicle maintenance records efficiently, ensuring organized data and streamlined operations.
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Database Design</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">SQL</span>
+                            <span class="bg-lime-100 text-lime-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Data Management</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2: 3D Printed Design and System for Soil Moisture Monitoring System -->
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-700 ease-in-out border border-gray-200">
+                    <img src="https://placehold.co/600x400/a78bfa/000000?text=Soil+Moisture" alt="3D Printed Design and System for Soil Moisture Monitoring System" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-3">3D Printed Soil Moisture Monitor</h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Designed and implemented a 3D-printed system for real-time soil moisture monitoring, incorporating hardware design and data acquisition for agricultural applications.
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">3D Design</span>
+                            <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">IoT</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Hardware Integration</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-gradient-to-br from-blue-500 to-indigo-600 text-white py-16 md:py-24">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-5xl font-extrabold mb-8">Get In Touch</h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Have a project in mind or just want to say hello? Feel free to reach out!
+                </p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-8">
+                    <div class="flex items-center">
+                        <i data-lucide="mail" class="w-8 h-8 mr-3 text-blue-200"></i>
+                        <span class="text-lg">pranavkhandait@gmail.com</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i data-lucide="phone" class="w-8 h-8 mr-3 text-blue-200"></i>
+                        <span class="text-lg">+91 7276523796</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i data-lucide="map-pin" class="w-8 h-8 mr-3 text-blue-200"></i>
+                        <span class="text-lg">C9 Ganga Apartment Viveknagar, India</span>
+                    </div>
+                </div>
+                <div class="mt-12">
+                    <h3 class="text-2xl font-semibold mb-6">Connect with me on Social Media</h3>
+                    <div class="flex justify-center space-x-6">
+                        <a href="https://www.linkedin.com/in/pranav-jaywant-khandait-7b552b363?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="p-2 rounded-full hover:bg-white hover:text-blue-700 hover:scale-105 transition-all duration-700 ease-in-out">
+                            <i data-lucide="linkedin" class="w-8 h-8"></i>
+                        </a>
+                        <a href="https://github.com/pranavkhandait" target="_blank" class="p-2 rounded-full hover:bg-white hover:text-blue-700 hover:scale-105 transition-all duration-700 ease-in-out">
+                            <i data-lucide="github" class="w-8 h-8"></i>
+                        </a>
+                        <a href="https://x.com/khandait_pranav?t=rJT_hqvVFmBdcdDGciLd8g&s=08" target="_blank" class="p-2 rounded-full hover:bg-white hover:text-blue-700 hover:scale-105 transition-all duration-700 ease-in-out">
+                            <i data-lucide="twitter" class="w-8 h-8"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2024 Pranav Khandait. All rights reserved.</p>
+            <p class="text-sm mt-2">Built with ❤️ and Tailwind CSS</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Theme Toggle Functionality
+        const themeSlider = document.getElementById('theme-slider');
+        const themeSliderMobile = document.getElementById('theme-slider-mobile');
+        const htmlElement = document.documentElement;
+
+        // Function to set the theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                if (themeSlider) themeSlider.classList.add('dark-mode');
+                if (themeSliderMobile) themeSliderMobile.classList.add('dark-mode');
+            } else {
+                htmlElement.classList.remove('dark');
+                if (themeSlider) themeSlider.classList.remove('dark-mode');
+                if (themeSliderMobile) themeSliderMobile.classList.remove('dark-mode');
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        // Check for saved theme in localStorage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle theme on slider click
+        function toggleTheme() {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        }
+
+        if (themeSlider) {
+            themeSlider.addEventListener('click', toggleTheme);
+        }
+        if (themeSliderMobile) {
+            themeSliderMobile.addEventListener('click', toggleTheme);
+        }
+
+
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu after clicking a link
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside (optional, but good UX)
+        document.addEventListener('click', function(event) {
+            const isClickInside = mobileMenu.contains(event.target) || mobileMenuButton.contains(event.target) || (themeSlider && themeSlider.contains(event.target)) || (themeSliderMobile && themeSliderMobile.contains(event.target));
+            if (!isClickInside && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
